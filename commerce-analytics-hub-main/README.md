@@ -55,6 +55,69 @@ El proyecto utiliza las siguientes variables de entorno configuradas en `.env`:
 - `POSTGRES_DB`: Nombre de la base de datos (default: commerce_db)
 - `POSTGRES_PORT`: Puerto de PostgreSQL (default: 5432)
 
+## Configuración de Base de Datos
+
+### Esquemas de Datos
+
+El proyecto utiliza una arquitectura de datos con tres esquemas principales para organizar el flujo de información:
+
+- **raw**: Datos crudos sin procesar (ingesta inicial)
+- **clean**: Datos limpios y validados
+- **gold**: Datos procesados listos para análisis y reportes
+
+### Creación de Esquemas
+
+Para crear los esquemas necesarios, ejecuta los siguientes comandos SQL:
+
+```sql
+-- Crear esquema para datos crudos
+CREATE SCHEMA raw;
+
+-- Crear esquema para datos limpios
+CREATE SCHEMA clean;
+
+-- Crear esquema para datos procesados
+CREATE SCHEMA gold;
+```
+
+O ejecuta todos los comandos a la vez:
+
+```sql
+CREATE SCHEMA raw;
+CREATE SCHEMA clean;
+CREATE SCHEMA gold;
+```
+
+### Verificación de Esquemas
+
+Para verificar que los esquemas se crearon correctamente:
+
+```sql
+-- Listar todos los esquemas
+SELECT schema_name 
+FROM information_schema.schemata 
+WHERE schema_name NOT IN ('information_schema', 'pg_catalog', 'pg_toast')
+ORDER BY schema_name;
+```
+
+### Conexión con DBeaver
+
+1. **Configurar conexión**:
+   - Host: `localhost`
+   - Port: `5432`
+   - Database: `commerce_db`
+   - User: `admin`
+   - Password: `admin`
+
+2. **Ejecutar comandos SQL**:
+   - Abre el editor SQL
+   - Pega los comandos CREATE SCHEMA
+   - Ejecuta con F5 o el botón "Execute"
+
+3. **Verificar creación**:
+   - Expande el nodo "Schemas" en el navegador de bases de datos
+   - Deberías ver `raw`, `clean` y `gold` junto con `public`
+
 ## Servicios
 
 ### Base de Datos PostgreSQL
