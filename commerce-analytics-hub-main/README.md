@@ -10,22 +10,6 @@ Commerce Analytics Hub es una plataforma centralizada para el análisis de datos
 - **Orquestación**: Docker & Docker Compose
 - **Sistema Operativo**: Windows
 
-## Estructura del Proyecto
-
-```
-commerce-analytics-hub/
-|-- docker-compose.yml    # Configuración de servicios Docker
-|-- .env                  # Variables de entorno
-|-- README.md            # Documentación del proyecto
-|-- orders.csv           # Dataset de órdenes de Olist
-|-- order_items.csv      # Ítems por orden
-|-- order_payments.csv   # Información de pagos
-|-- customers.csv        # Datos de clientes
-|-- products.csv         # Catálogo de productos
-|-- assets/              # Recursos del proyecto
-|   |-- dbeaver-schemas.png  # Pantallazo de esquemas en DBeaver
-```
-
 ## Dataset de Olist
 
 El proyecto incluye el dataset público de comercio electrónico brasileño de Olist, que contiene más de 100,000 órdenes realizadas entre 2016 y 2018.
@@ -195,10 +179,6 @@ FROM information_schema.schemata
 WHERE schema_name NOT IN ('information_schema', 'pg_catalog', 'pg_toast')
 ORDER BY schema_name;
 ```
-
-![Esquemas de base de datos en DBeaver](assets/dbeaver-schemas.png)
-
-*Pantallazo mostrando los esquemas `raw`, `clean` y `gold` creados correctamente en DBeaver*
 
 ### Conexión con DBeaver
 
