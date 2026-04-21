@@ -22,6 +22,8 @@ commerce-analytics-hub/
 |-- order_payments.csv   # Información de pagos
 |-- customers.csv        # Datos de clientes
 |-- products.csv         # Catálogo de productos
+|-- assets/              # Recursos del proyecto
+|   |-- dbeaver-schemas.png  # Pantallazo de esquemas en DBeaver
 ```
 
 ## Dataset de Olist
@@ -193,6 +195,10 @@ FROM information_schema.schemata
 WHERE schema_name NOT IN ('information_schema', 'pg_catalog', 'pg_toast')
 ORDER BY schema_name;
 ```
+
+![Esquemas de base de datos en DBeaver](assets/dbeaver-schemas.png)
+
+*Pantallazo mostrando los esquemas `raw`, `clean` y `gold` creados correctamente en DBeaver*
 
 ### Conexión con DBeaver
 
