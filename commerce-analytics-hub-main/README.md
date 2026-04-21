@@ -17,7 +17,101 @@ commerce-analytics-hub/
 |-- docker-compose.yml    # Configuración de servicios Docker
 |-- .env                  # Variables de entorno
 |-- README.md            # Documentación del proyecto
+|-- orders.csv           # Dataset de órdenes de Olist
+|-- order_items.csv      # Ítems por orden
+|-- order_payments.csv   # Información de pagos
+|-- customers.csv        # Datos de clientes
+|-- products.csv         # Catálogo de productos
 ```
+
+## Dataset de Olist
+
+El proyecto incluye el dataset público de comercio electrónico brasileño de Olist, que contiene más de 100,000 órdenes realizadas entre 2016 y 2018.
+
+### Archivos del Dataset
+
+- **orders.csv** (17.6 MB): Datos principales de órdenes
+  - `order_id`: Identificador único de orden
+  - `customer_id`: ID del cliente
+  - `order_status`: Estado de la orden
+  - `order_purchase_timestamp`: Fecha de compra
+  - `order_approved_at`: Fecha de aprobación
+  - `order_delivered_carrier_date`: Fecha de entrega al transportista
+  - `order_delivered_customer_date`: Fecha de entrega al cliente
+  - `order_estimated_delivery_date`: Fecha estimada de entrega
+
+- **order_items.csv** (15.4 MB): Ítems individuales por orden
+  - `order_id`: ID de la orden
+  - `order_item_id`: Número de ítem en la orden
+  - `product_id`: ID del producto
+  - `seller_id`: ID del vendedor
+  - `shipping_limit_date`: Límite de envío
+  - `price`: Precio del ítem
+  - `freight_value`: Costo de envío
+
+- **order_payments.csv** (5.8 MB): Métodos y detalles de pago
+  - `order_id`: ID de la orden
+  - `payment_sequential`: Secuencia de pago
+  - `payment_type`: Tipo de pago (credit_card, boleto, voucher, debit_card)
+  - `payment_installments`: Cuotas
+  - `payment_value`: Valor del pago
+
+- **customers.csv** (9.0 MB): Información demográfica de clientes
+  - `customer_id`: ID único del cliente por orden
+  - `customer_unique_id`: ID único del cliente global
+  - `customer_zip_code_prefix`: Código postal
+  - `customer_city`: Ciudad
+  - `customer_state`: Estado
+
+- **products.csv** (2.4 MB): Catálogo de productos
+  - `product_id`: ID del producto
+  - `product_category_name`: Categoría del producto
+  - `product_name_lenght`: Longitud del nombre
+  - `product_description_lenght`: Longitud de la descripción
+  - `product_photos_qty`: Cantidad de fotos
+  - `product_weight_g`: Peso en gramos
+  - `product_length_cm`: Largo en cm
+  - `product_height_cm`: Altura en cm
+  - `product_width_cm`: Ancho en cm
+
+### Fuente de Datos
+
+Los datos fueron descargados del repositorio público de GitHub:
+- **Repositorio**: wheff70/OlistDataAnalysis
+- **Fuente original**: Kaggle - Brazilian E-Commerce Public Dataset by Olist
+- **Período**: 2016-2018
+- **País**: Brasil
+- **Registros**: ~100,000 órdenes
+
+### Uso del Dataset
+
+Para cargar los datos en PostgreSQL:
+
+```sql
+-- Crear tablas en esquema raw
+CREATE TABLE raw.orders (
+    order_id VARCHAR(255) PRIMARY KEY,
+    customer_id VARCHAR(255),
+    order_status VARCHAR(50),
+    order_purchase_timestamp TIMESTAMP,
+    order_approved_at TIMESTAMP,
+    order_delivered_carrier_date TIMESTAMP,
+    order_delivered_customer_date TIMESTAMP,
+    order_estimated_delivery_date TIMESTAMP
+);
+
+-- Repetir para las otras tablas (order_items, order_payments, customers, products)
+```
+
+### Análisis Posibles
+
+- Análisis de tendencias de ventas temporales
+- Segmentación de clientes
+- Análisis de productos más vendidos
+- Estudio de métodos de pago
+- Análisis geográfico de ventas
+- Predicción de entregas tardías
+- Análisis de valor del cliente (LTV)
 
 ## Configuración Inicial
 
