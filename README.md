@@ -10,6 +10,23 @@ Commerce Analytics Hub es una plataforma centralizada para el análisis de datos
 - **Orquestación**: Docker & Docker Compose
 - **Sistema Operativo**: Windows
 
+## Estructura del Proyecto
+
+```
+commerce-analytics-hub/
+|-- frontend/
+|-- backend/
+|   |-- customers.csv
+|   |-- orders.csv
+|   |-- order_items.csv
+|   |-- order_payments.csv
+|   |-- products.csv
+|-- db/
+|   |-- data/              # Datos de PostgreSQL
+|-- docker-compose.yml
+|-- README.md
+```
+
 ## Dataset de Olist
 
 El proyecto incluye el dataset público de comercio electrónico brasileño de Olist, que contiene más de 100,000 órdenes realizadas entre 2016 y 2018.
