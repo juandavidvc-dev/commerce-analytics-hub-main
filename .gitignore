@@ -132,3 +132,9 @@ temp/
 # Configuration files with secrets
 config/secrets.yml
 config/database.yml
+
+# Data files - CSV files are typically large and should be handled separately
+db/data/*.csv
+backend/*.csv
+!db/data/sample/*.csv
+!db/data/examples/*.csv
