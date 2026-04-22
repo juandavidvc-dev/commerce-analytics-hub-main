@@ -1,10 +1,10 @@
-# Environment variables
+# Variables de entorno
 .env
 .env.local
 .env.production
 .env.staging
 
-# Database files
+# Archivos de base de datos
 *.db
 *.sqlite
 *.sqlite3
@@ -16,71 +16,71 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Runtime data
+# Datos de tiempo de ejecución
 pids/
 *.pid
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
+# Directorio de cobertura usado por herramientas como istanbul
 coverage/
 *.lcov
 
-# nyc test coverage
+# Cobertura de pruebas nyc
 .nyc_output
 
-# Dependency directories
+# Directorios de dependencias
 node_modules/
 jspm_packages/
 
-# Optional npm cache directory
+# Directorio de caché npm opcional
 .npm
 
-# Optional eslint cache
+# Caché de eslint opcional
 .eslintcache
 
-# Output of 'npm pack'
+# Salida de 'npm pack'
 *.tgz
 
-# Yarn Integrity file
+# Archivo de integridad de Yarn
 .yarn-integrity
 
-# dotenv environment variables file
+# Archivo de variables de entorno dotenv
 .env.test
 
-# parcel-bundler cache (https://parceljs.org/)
+# Caché de parcel-bundler (https://parceljs.org/)
 .cache
 .parcel-cache
 
-# next.js build output
+# Salida de compilación de next.js
 .next
 
-# nuxt.js build output
+# Salida de compilación de nuxt.js
 .nuxt
 
-# vuepress build output
+# Salida de compilación de vuepress
 .vuepress/dist
 
-# Serverless directories
+# Directorios serverless
 .serverless
 
-# FuseBox cache
+# Caché de FuseBox
 .fusebox/
 
-# DynamoDB Local files
+# Archivos locales de DynamoDB
 .dynamodb/
 
-# TernJS port file
+# Archivo de puerto de TernJS
 .tern-port
 
-# IDE files
+# Archivos de IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS generated files
+# Archivos generados por el SO
 .DS_Store
 .DS_Store?
 ._*
@@ -114,26 +114,26 @@ wheels/
 .installed.cfg
 *.egg
 
-# Database backups
+# Respaldos de base de datos
 *.sql.bak
 *.backup
 
-# Temporary files
+# Archivos temporales
 tmp/
 temp/
 *.tmp
 
-# SSL certificates
+# Certificados SSL
 *.pem
 *.key
 *.crt
 *.csr
 
-# Configuration files with secrets
+# Archivos de configuración con secretos
 config/secrets.yml
 config/database.yml
 
-# Data files - CSV files are typically large and should be handled separately
+# Archivos de datos - Los archivos CSV son típicamente grandes y deben manejarse por separado
 db/data/*.csv
 backend/*.csv
 !db/data/sample/*.csv
