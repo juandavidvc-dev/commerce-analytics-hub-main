@@ -1,7 +1,7 @@
 {
   "name": "commerce-analytics-hub-backend",
   "version": "1.0.0",
-  "description": "Backend for Commerce Analytics Hub with Hexagonal Architecture",
+  "description": "Backend para Commerce Analytics Hub con Arquitectura Hexagonal",
   "main": "dist/main.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
@@ -9,7 +9,7 @@
     "start": "node dist/main.js",
     "test": "jest"
   },
-  "keywords": ["commerce", "analytics", "hexagonal-architecture"],
+  "keywords": ["comercio", "analitica", "arquitectura-hexagonal"],
   "author": "",
   "license": "MIT",
   "dependencies": {

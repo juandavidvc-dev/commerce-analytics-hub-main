@@ -14,17 +14,36 @@ Commerce Analytics Hub es una plataforma centralizada para el análisis de datos
 
 ```
 commerce-analytics-hub/
-|-- frontend/
-|-- backend/
-|   |-- customers.csv
-|   |-- orders.csv
-|   |-- order_items.csv
-|   |-- order_payments.csv
-|   |-- products.csv
-|-- db/
-|   |-- data/              # Datos de PostgreSQL
-|-- docker-compose.yml
-|-- README.md
+├── backend/                    # Backend con arquitectura hexagonal
+│   ├── src/
+│   │   ├── adapters/          # Adaptadores (HTTP, etc.)
+│   │   ├── application/       # Casos de uso
+│   │   ├── domain/           # Dominio y entidades
+│   │   └── infrastructure/   # Configuración externa
+│   ├── package.json
+│   └── tsconfig.json
+├── frontend/                  # Frontend (pendiente de desarrollo)
+├── src/                      # Código fuente principal
+│   ├── adapters/
+│   ├── application/
+│   ├── domain/
+│   └── infrastructure/
+├── scripts/                   # Scripts SQL
+│   ├── create_raw_orders.sql
+│   └── create_schemas.sql
+├── db/                       # Base de datos
+│   ├── data/                # Datos de PostgreSQL
+│   │   ├── examples/        # Datos de ejemplo
+│   │   └── sample/          # Muestras de datos
+│   └── README.md
+├── main.ts                   # Servidor principal con Express
+├── package.json              # Dependencias del proyecto
+├── tsconfig.json             # Configuración TypeScript
+├── docker-compose.yml        # Orquestación Docker
+├── .env.example             # Variables de entorno ejemplo
+├── .gitignore               # Archivos ignorados por Git
+├── LICENSE                  # Licencia MIT
+└── README.md               # Documentación del proyecto
 ```
 
 ## Dataset de Olist
@@ -223,6 +242,39 @@ ORDER BY schema_name;
 - **Imagen**: `postgres:15`
 - **Puerto**: `5432:5432`
 - **Persistencia**: Volumen `postgres_data`
+
+## API del Servidor
+
+El proyecto incluye un servidor API con Express.js que proporciona endpoints para el análisis de datos:
+
+### Endpoints Disponibles
+
+- `GET /` - Mensaje de bienvenida de la API
+- `GET /health` - Verificación de estado del servidor
+- `GET /test` - Prueba de conexión a la base de datos
+- `GET /kpis` - Obtener KPIs de ventas (requiere tabla gold.fact_sales)
+
+### Características de Seguridad
+
+- **Rate Limiting**: Límite de 100 peticiones por 15 minutos
+- **CORS**: Configuración segura de orígenes permitidos
+- **Validación de entrada**: Límites de tamaño de payload (10MB)
+- **Logging seguro**: Registro de peticiones con timestamps
+- **Variables de entorno**: Configuración sensible mediante .env
+
+### Iniciar el Servidor
+
+```bash
+# Instalar dependencias
+npm install
+
+# Iniciar en modo desarrollo
+npm run dev
+
+# O construir y ejecutar
+npm run build
+npm start
+```
 
 ## Uso
 

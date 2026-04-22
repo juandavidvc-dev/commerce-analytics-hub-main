@@ -11,16 +11,16 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Basic route
+// Ruta básica
 app.get('/', (req, res) => {
-  res.json({ message: 'Commerce Analytics Hub Backend API' });
+  res.json({ message: 'API Backend de Commerce Analytics Hub' });
 });
 
-// Health check
+// Verificación de estado
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ estado: 'OK', timestamp: new Date().toISOString() });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });
