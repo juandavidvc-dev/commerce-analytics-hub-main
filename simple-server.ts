@@ -22,12 +22,12 @@ const pool = new Pool({
 });
 
 // Root endpoint
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.json({ message: 'Servidor funcionando correctamente' });
 });
 
 // Test endpoint
-app.get('/test', async (req, res) => {
+app.get('/test', async (_req, res) => {
   try {
     const result = await pool.query('SELECT NOW() as time');
     res.json({ success: true, time: result.rows[0].time });
@@ -38,7 +38,7 @@ app.get('/test', async (req, res) => {
 });
 
 // KPIs endpoint
-app.get('/kpis', async (req, res) => {
+app.get('/kpis', async (_req, res) => {
   try {
     const query = `
       SELECT 

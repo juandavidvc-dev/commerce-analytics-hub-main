@@ -2,54 +2,44 @@
 
 ## Overview
 
-Commerce Analytics Hub es una plataforma centralizada para el análisis de datos de comercio electrónico. Este proyecto proporciona herramientas y visualizaciones para analizar tendencias de ventas, comportamiento de clientes y métricas clave de rendimiento.
+Commerce Analytics Hub es una plataforma completa de análisis de comercio electrónico construida con arquitectura hexagonal, diseñada para procesar datos del dataset Olist y proporcionar visualizaciones interactivas de KPIs clave de negocio.
 
-## Stack Tecnológico
+## 🏗️ Arquitectura
 
-- **Base de Datos**: PostgreSQL 15
-- **Orquestación**: Docker & Docker Compose
-- **Sistema Operativo**: Windows
+### Backend (Node.js + Express + TypeScript)
+- **Arquitectura Hexagonal**: Domain-Driven Design con separación clara de responsabilidades
+- **ORM**: Prisma para gestión de base de datos
+- **Base de Datos**: PostgreSQL 15 con esquemas multi-capa (raw → clean → gold)
+- **API REST**: Endpoints para todos los KPIs requeridos
 
-## Estructura del Proyecto
+### Frontend (Next.js + TypeScript)
+- **Framework**: Next.js 14 con App Router
+- **UI**: Tailwind CSS + shadcn/ui
+- **Gráficos**: Recharts para visualizaciones interactivas
+- **Tipo Seguro**: TypeScript estricto
 
-```
-commerce-analytics-hub/
-├── backend/                    # Backend con arquitectura hexagonal
-│   ├── src/
-│   │   ├── adapters/          # Adaptadores (HTTP, etc.)
-│   │   ├── application/       # Casos de uso
-│   │   ├── domain/           # Dominio y entidades
-│   │   └── infrastructure/   # Configuración externa
-│   ├── package.json
-│   └── tsconfig.json
-├── frontend/                  # Frontend (pendiente de desarrollo)
-├── src/                      # Código fuente principal
-│   ├── adapters/
-│   ├── application/
-│   ├── domain/
-│   └── infrastructure/
-├── scripts/                   # Scripts SQL
-│   ├── create_raw_orders.sql
-│   └── create_schemas.sql
-├── db/                       # Base de datos
-│   ├── data/                # Datos de PostgreSQL
-│   │   ├── examples/        # Datos de ejemplo
-│   │   └── sample/          # Muestras de datos
-│   └── README.md
-├── main.ts                   # Servidor principal con Express
-├── package.json              # Dependencias del proyecto
-├── tsconfig.json             # Configuración TypeScript
-├── docker-compose.yml        # Orquestación Docker
-├── .env.example             # Variables de entorno ejemplo
-├── .gitignore               # Archivos ignorados por Git
-├── LICENSE                  # Licencia MIT
-└── README.md               # Documentación del proyecto
-```
+### Infraestructura
+- **Containerización**: Docker Compose con 3 servicios
+- **Base de Datos**: PostgreSQL persistente
+- **Health Checks**: Monitoreo de servicios
+- **Variables de Entorno**: Configuración segura
 
-## Dataset de Olist
+## 📊 KPIs Implementados
 
-El proyecto incluye el dataset público de comercio electrónico brasileño de Olist, que contiene más de 100,000 órdenes realizadas entre 2016 y 2018.
+### Métricas Principales
+1. **GMV (Gross Merchandise Value)**: Σ item_price
+2. **Revenue (Paid)**: Σ payment_value (órdenes pagadas)
+3. **Orders**: COUNT(DISTINCT order_id)
+4. **AOV (Average Order Value)**: Revenue / Orders
+5. **Items per Order**: COUNT(order_item_id) / Orders
+6. **Cancellation Rate**: cancelled_orders / total_orders
+7. **On-Time Delivery Rate**: delivered_on_or_before_estimated / delivered_total
 
+### Visualizaciones
+- **Dashboard Principal**: Cards con todos los KPIs
+- **Gráficos de Tendencia**: Revenue y Orders temporales
+- **Rankings**: Top productos por GMV y Revenue
+- **Filtros**: Rango de fechas + 2 filtros adicionales
 ### Archivos del Dataset
 
 - **orders.csv** (17.6 MB): Datos principales de órdenes

@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Esquema RAW - Datos crudos del dataset Olist
+model RawOrders {
+  order_id                     String   @id
+  customer_id                  String
+  order_status                 String
+  order_purchase_timestamp     DateTime
+  order_approved_at            DateTime?
+  order_delivered_carrier_date DateTime?
+  order_delivered_customer_date DateTime?
+  order_estimated_delivery_date DateTime
+
+  @@map("raw.orders")
+}
+
+model RawOrderItems {
+  order_id         String
+  order_item_id    Int
+  product_id       String
+  seller_id        String
+  shipping_limit_date DateTime
+  price            Float
+  freight_value    Float
+
+  @@id([order_id, order_item_id])
+  @@map("raw.order_items")
+}
+
+model RawProducts {
+  product_id                    String @id
+  product_category_name          String?
+  product_name_lenght           Int?
+  product_description_lenght    Int?
+  product_photos_qty            Int?
+  product_weight_g              Int?
+  product_length_cm             Int?
+  product_height_cm             Int?
+  product_width_cm              Int?
+
+  @@map("raw.products")
+}
+
+model RawCustomers {
+  customer_id                String @id
+  customer_unique_id         String
+  customer_zip_code_prefix   Int
+  customer_city              String
+  customer_state             String
+
+  @@map("raw.customers")
+}
+
+model RawOrderPayments {
+  order_id       String
+  payment_sequential Int
+  payment_type   String
+  payment_installments Int
+  payment_value  Float
+
+  @@id([order_id, payment_sequential])
+  @@map("raw.order_payments")
+}
+
+// Esquema GOLD - Esquema estrella para análisis
+model FactSales {
+  id                  Int @id @default(autoincrement())
+  order_id            String
+  order_item_id       Int
+  customer_id         String
+  product_id          String
+  date_id             Int
+  product_category    String
+  customer_state      String
+  order_status        String
+  
+  // Fechas clave
+  purchase_date       DateTime
+  approved_date       DateTime?
+  delivered_date      DateTime?
+  estimated_date      DateTime
+  
+  // Medidas
+  item_price          Float
+  freight_value       Float
+  payment_value_allocated Float
+  
+  // Flags
+  is_delivered        Boolean @default(false)
+  is_canceled         Boolean @default(false)
+  is_on_time          Boolean @default(false)
+
+  @@map("gold.fact_sales")
+}
+
+model DimDate {
+  date_id             Int @id
+  date                DateTime
+  day                 Int
+  month               Int
+  year                Int
+  quarter             Int
+  day_of_week         Int
+  day_name            String
+  month_name          String
+  is_weekend          Boolean
+
+  @@map("gold.dim_date")
+}
+
+model DimCustomer {
+  customer_id         String @id
+  customer_unique_id  String
+  customer_city       String
+  customer_state      String
+  customer_region     String
+
+  @@map("gold.dim_customer")
+}
+
+model DimProduct {
+  product_id          String @id
+  product_category    String
+  product_weight_g    Int?
+  product_length_cm   Int?
+  product_height_cm   Int?
+  product_width_cm    Int?
+
+  @@map("gold.dim_product")
+}
+
+model DimOrder {
+  order_id            String @id
+  customer_id         String
+  order_status        String
+  purchase_date       DateTime
+  approved_date       DateTime?
+  delivered_date      DateTime?
+  estimated_date      DateTime
+
+  @@map("gold.dim_order")
+}
